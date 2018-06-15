@@ -1,5 +1,5 @@
 # jt-api
-## EMS Job Ticket (MS ACCESS) API
+## EMS Job Ticket (Microsoft ACCESS) REST API w/ Basic Web GUI
 
 The purpose of this application is to provide external access the EMS Legacy MS ACCESS 97 database tables and
 the serve data to other, more modern, applications via a REST/HTTP API.
