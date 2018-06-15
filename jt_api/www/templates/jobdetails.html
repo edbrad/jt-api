@@ -1,0 +1,221 @@
+{% load staticfiles %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>pyACCESS - EMS Job Ticket Explorer</title>
+        <!-- Third Party CSS Libraries -->
+        <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap-theme.min.css' %}">
+        <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    </head>
+    <body>
+        <h1><b>Job Ticket Details</b></h1>
+        <a id="printTicket" class="btn btn-success"><i class="fa fa-print fa-lg"></i> Print Ticket</a>
+        <h3>General Job Information</h3>
+        <div>
+            <table class="table table-bordered table-striped table-condensed">
+                <tr>
+                    <th class="col-xs-3">Job Number:</th>
+                    <th class="col-xs-9">{{ jobnum }}</th>
+                </tr>
+                <tr>
+                    <td><b>Company/Contact:</b></td>
+                    {% if company.Comp %}
+                        <td>{{ company.Comp }}<br>{{ company.Contact }}<br>
+                        {{company.Add1}} {{company.Add2}}<br>{{company.City}}, 
+                        {{company.state}}  {{company.zip}}<br>{{company.phone}}</td>
+                    {% elif job.Company %}
+                        <td>{{ job.Company }} / {{ job.Contact }} </td>
+                    {% else %}
+                        <td> </td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td><b>Description:</b></td>
+                    <td>{{ job.JobDescp }}</td>
+                </tr>
+                <tr>
+                    <td><b>Special Info.:</b></td>
+                    <td>{{ job.MeterInst }}</td>
+                </tr>
+                <tr>
+                    <td><b>Salesperson/CSR Ticket Date:</b></td>
+                    <td>{{ job.Remark }}</td>
+                </tr>
+                <tr>
+                    <td><b>Receiving Dept.:</b></td>
+                    <td>{{ job.RDept }}</td>
+                </tr>
+                <tr>
+                    <td><b>Starting Drop Date:</b></td>
+                    <td><b>{{ job.DropDate }}</b></td>
+                </tr>
+                {% if job.ToDropDate != None %}
+                <tr>
+                    <td><b>Ending Drop Date:</b></td>
+                    <td><b>{{ job.ToDropDate }}</b></td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td><b>Permit Number:</b></td>
+                    <td>{{ job.Permit }}</td>
+                </tr> 
+                <tr>
+                    <td><b>Total Pieces:</b></td>
+                    <td><b>{{ totjobcount|intcomma }}<b></td>
+                </tr> 
+                <tr>
+                    <td><b>Samples:</b></td>
+                    <td>{{ job.Sample1 }}</td>
+                </tr>
+                <!-- Samples -->
+                {% if job.Sample2 != None %}
+                <tr>
+                    <td></td>
+                    <td>{{ job.Sample2 }}</td>
+                </tr>
+                {% endif %}
+                {% if job.Sample3 != None %}
+                <tr>
+                    <td></td>
+                    <td>{{ job.Sample3 }}</td>
+                </tr>
+                {% endif %}
+                {% if job.Sample4 != None %}
+                <tr>
+                    <td></td>
+                    <td>{{ job.Sample4 }}</td>
+                </tr>
+                {% endif %}
+                {% if job.Sample5 != None %}
+                <tr>
+                    <td></td>
+                    <td>{{ job.Sample5 }}</td>
+                </tr>
+                {% endif %}
+                {% if job.Sample6 != None %}
+                <tr>
+                    <td></td>
+                    <td>{{ job.Sample6 }}</td>
+                </tr>
+                {% endif %}
+                {% if job.Sample7 != None %}
+                <tr>
+                    <td></td>
+                    <td>{{ job.Sample7 }}</td>
+                </tr>
+                {% endif %}
+                {% if job.Sample8 != None %}
+                <tr>
+                    <td></td>
+                    <td>{{ job.Sample8 }}</td>
+                </tr>
+                {% endif %}
+                {% if job.Sample9 != None %}
+                <tr>
+                    <td></td>
+                    <td>{{ job.Sample9 }}</td>
+                </tr>
+                {% endif %}
+                {% if job.Sample10 != None %}
+                <tr>
+                    <td></td>
+                    <td>{{ job.Sample10 }}</td>
+                </tr>
+                {% endif %}
+                {% if job.Sample11 != None %}
+                <tr>
+                    <td></td>
+                    <td>{{ job.Sample11 }}</td>
+                </tr>
+                {% endif %}
+                {% if job.Sample12 != None %}
+                <tr>
+                    <td></td>
+                    <td>{{ job.Sample12 }}</td>
+                </tr>
+                {% endif %}
+                {% if job.Sample13 != None %}
+                <tr>
+                    <td></td>
+                    <td>{{ job.Sample13 }}</td>
+                </tr>
+                {% endif %}
+                {% if job.Sample14 != None %}
+                <tr>
+                    <td></td>
+                    <td>{{ job.Sample14 }}</td>
+                </tr>
+                {% endif %}
+                {% if job.Sample15 != None %}
+                <tr>
+                    <td></td>
+                    <td>{{ job.Sample15 }}</td>
+                </tr>
+                {% endif %}
+            </table>
+        </div>
+        <!-- Pattern List -->
+        <h3>Pattern List</h3>
+        <p style="color:steelblue; font-size: small;"><b><em>click pattern letter to see details</em></b></p>
+        <div>
+            <table class="table table-bordered table-striped table-condensed">
+                <tr>
+                    <th class="col-xs-1">Pattern</th>
+                    <th class="col-xs-4">Label</th>
+                    <th class="col-xs-4">Description</th>
+                    <th class="col-xs-2">Mail Class / Payment</th>
+                    <th class="col-xs-1">Quantity</th>
+                </tr>
+            {% for pat in patterns %}
+                <tr>
+                    <td><a href="/pattern-details/{{ jobnum }}/{{ pat.jobpat }}"> <b>{{ pat.jobpat|upper }}</b></a></td>
+                    <td>{{ pat.DESCP1 }}</td>
+                    <td>{{ pat.DESCP2 }}</td>
+                    <td>{{ pat.MailClass }} / {{ pat.Payment }}</td>
+                    <td>{{ pat.lngNSAID |intcomma }}</td>
+                </tr> 
+            {% endfor %}
+            </table>      
+        </div>
+        <!-- Departmental Instructions -->
+        <h3>Departmental Instructions</h3>
+        <table class="table table-bordered table-striped table-condensed">
+            <tr>
+                <td class="col-xs-3"><b>Excess Stock:</b></td>
+                <td class="col-xs-9">{{ job.stockInst }}</td>
+            </tr>
+            <tr>
+                <td><b>Computer Room:</b></td>
+                <td>{{ job.CRInst }}</td>
+            </tr>
+            <tr>
+                <td><b>Inkjet Dept:</b></td>
+                <td>{{ job.AdDept }}</td>
+            </tr>
+            <tr>
+                <td><b>Bindery Dept:</b></td>
+                <td>{{ job.BDInst }}</td>
+            </tr>
+            <tr>
+                <td><b>Stamp Dept:</b></td>
+                <td>{{ job.StampInst }}</td>
+            </tr>
+            <tr>
+                <td><b>Inserting Dept:</b></td>
+                <td>{{ job.InDInst }}</td>
+            </tr>
+            <tr>
+                <td><b>Postage Statements:</b></td>
+                <td>{{ job.3602Inst }}</td>
+            </tr>
+        <!-- Third Party Javascript Libraries -->
+        <script src="{% static 'jquery-3.1.1-dist/js/jquery-3.1.1.js' %}"></script>
+        <!-- Custom Javascript -->
+        <script src="{% static '/js/main.js' %}"></script>
+    </body>
+</html>

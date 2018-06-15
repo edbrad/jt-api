@@ -1,0 +1,21 @@
+body{
+    width:90%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* center Job Search Form on page */
+.jobsearch_form{
+	color:darkslategrey;
+	width:385px;
+	height:400px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin:-180px 0 0 -192px;
+}
+
+/* add space on top of button when wrapping occurs */
+.jobsearch_input {
+    margin-top: 7px;
+}

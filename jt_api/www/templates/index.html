@@ -1,0 +1,35 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>pyACCESS - EMS Job Ticket Explorer</title>
+        <!-- Third Party CSS Libraries -->
+        <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap-theme.min.css' %}">
+        <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    </head>
+    <body>
+        <div align="center" class="jobsearch_form">
+            <div><img src="../static/img/emslogoT.gif"></div>
+            <h1><b>EMS Job Ticket Explorer<b></h1>
+            <p><em>Version 0.0.0 (Alpha)</em></p>
+            <form class="form-inline" action="/jobnum-search/" method="get">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="col-md-12 col-form-label" for="jobnum">Enter a Full or Partial EMS Job Number: </label>
+                    <div class="col-md-12">
+                        <input class="form-control jobsearch_input" id="jobsearch" type="text" name="jobnum" value="{{ jobnum }}" placeholder="9999-99">
+                        <button type="submit" class="btn btn-primary jobsearch_input"><i class="fa fa-search fa-lg"></i>&nbspSearch</button>
+                    </div> 
+                </div>
+            </form>
+        </div>    
+        <!-- Third Party Javascript Libraries -->
+        <script src="{% static 'jquery-3.1.1-dist/js/jquery-3.1.1.js' %}"></script>
+        <!-- Custom Javascript -->
+        <script src="{% static '/js/main.js' %}"></script>
+    </body>
+</html>
