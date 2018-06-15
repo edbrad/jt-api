@@ -8,4 +8,6 @@ The basic Job Search Web GUI is built using **Django**, a *Python-based* Web app
 
 The REST API is implemented using the Django REST Framework (http://www.django-rest-framework.org/).
 
-This project currently utilizes the **pyodbc** Python library (https://mkleehammer.github.io/pyodbc/) to connect and read from the MS Access Database (.mdb) via ODBC.
+This project currently utilizes the **pyodbc** Python library (https://mkleehammer.github.io/pyodbc/) to connect and read from the network-shared MS Access Database (.mdb) file via the Microsoft ODBC driver (Included as part of a typical Windows OS Installation).
+
+This project is deployed to IIS 8, running on Windows Server 2012 R2, and using Microsoft's wfastcgi Python application server.  The blog article by Matt Woodward (http://blog.mattwoodward.com/2016/07/running-django-application-on-windows.html) was used as a guide to aid in the deployment. 
