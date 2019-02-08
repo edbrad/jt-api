@@ -7,5 +7,6 @@ urlpatterns = [
     url(r'^jobdetails/$', views.jobdetails, name='jobdetails'),
     url(r'^companies/$', views.companies, name='companies'),
     url(r'^jobs-company/$', views.jobs_company, name='jobs_company'),
-    url(r'^stats/$', views.stats, name='stats')
+    url(r'^stats/$', views.stats, name='stats'),
+    url(r'^amendments/$', views.amendments, name='amendments')
 ]

@@ -159,6 +159,24 @@
                 {% endif %}
             </table>
         </div>
+        <!-- Amendments -->
+        <h3>Amendments</h3>
+        <div>
+            <table class="table table-bordered table-striped table-condensed">
+                <tr>
+                    <th class="col-xs-1">Amendment #</th>
+                    <th class="col-xs-2">Date</th>
+                    <th class="col-xs-9">Description</th>
+                </tr>
+            {% for amendment in amendments %}
+                <tr>
+                    <td>{{ amendment.lngAmendNum }}</td>
+                    <td>{{ amendment.dtmDateKeyed|date }}</td>
+                    <td>{{ amendment.strAmendComments }}</td>
+                </tr> 
+            {% endfor %}
+            </table>      
+        </div>
         <!-- Pattern List -->
         <h3>Pattern List</h3>
         <p style="color:steelblue; font-size: small;"><b><em>click pattern letter to see details</em></b></p>

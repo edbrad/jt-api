@@ -482,3 +482,41 @@ def stats(request):
     Return the response data (JSON)
     """
     return Response(stats_all)
+
+# Get Amendments for selected job number
+@api_view(['GET'])
+def amendments(request):
+    """
+    Query the ACCESS Database and return the list of matching Amendments for given Job Number
+    """
+    jobnum = request.GET['jobnum'] # get the job number parameter from the http request
+    
+    if jobnum == "":
+        rows = None
+    else:
+        # get pattern details for the selected Job
+        cnxn = pyodbc.connect(dbpath)
+        crsr = cnxn.cursor()
+        crsr.execute("SELECT * FROM [tblAmendments] where Jobnum = ? order by lngAmendNum", (str(jobnum)))
+        rows = crsr.fetchall()
+        # close the connection/lock
+        cnxn.close()
+
+        """
+        Serialize the query results into JSON (via a Python dictionary collection)
+        """
+        amendmentlist = list()
+        for row in rows:
+            # build list entry
+            d = collections.OrderedDict()
+            d['lngAmendNum'] = row.lngAmendNum
+            d['dtmDateKeyed'] = row.dtmDateKeyed
+            d['strAmendComments'] = row.strAmendComments
+           
+            # add entry to the list
+            amendmentlist.append(d)
+
+        """
+        Return the response data (JSON)
+        """
+        return Response(amendmentlist)

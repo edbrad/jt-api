@@ -52,6 +52,11 @@ def jobdetails(request, jobnum):
             if company.phone != None and company.phone != " ":
                 company.phone = format_phone(company.phone)
 
+        # get the Amendments for the Job Number
+        crsr_4 = cnxn.cursor()
+        crsr_4.execute("SELECT * FROM [tblAmendments] where Jobnum = ? order by lngAmendNum", (str(jobnum)))
+        amendments = crsr_4.fetchall()
+
         cnxn.close()
         
         total_pattern_count = 0
@@ -72,7 +77,8 @@ def jobdetails(request, jobnum):
                                                "patterns": patterns,
                                                "totjobcount": total_job_count,
                                                "job": job,
-                                               "company": company
+                                               "company": company,
+                                               "amendments": amendments
                                                })
 
 # display details for selected pattern (from jobdetails)
